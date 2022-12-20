@@ -1,6 +1,5 @@
 const increment = 'INCREMENT'
 const decrement = 'DECREMENT'
-const add_user = 'ADD_USER'
 
 // State
 
@@ -21,15 +20,28 @@ const decrementCounter = () => {
     }
 }
 
-const addUser = () => {
-    return {
-        type: add_user,
-        payload: { name: 'moshiur Rahman' }
+// Create Reducer for Counter
+const CounterReducer = (state = initialCounterState, action) => {
+    switch (action.type) {
+        case increment:
+            return {
+                ...state,
+                count: state.count + 1
+            }
+        // 
+        case decrement:
+            return {
+                ...state,
+                count: state.count - 1
+            }
+        // 
+
+
+        default:
+            state
     }
 }
 
-// INCREMENT COUNTER
-// DECREMENT COUNTER
 
 // In this Tutorial we learn:
 
@@ -37,3 +49,8 @@ const addUser = () => {
 // 2. Dispatch {Action}
 // 3. {Reducer} will work upto type of action
 // 4. And finally {Store}
+
+// After Second Class we learn:
+
+// Reducer: Reducer is a pure function which receive two input input parameter and work with the
+// given action type and do something.
