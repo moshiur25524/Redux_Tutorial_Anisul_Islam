@@ -2,6 +2,7 @@ const { createStore } = require('redux')
 
 const increment = 'INCREMENT'
 const decrement = 'DECREMENT'
+const reset = 'RESET'
 
 // State
 
@@ -21,6 +22,12 @@ const decrementCounter = () => {
     }
 }
 
+const resetCounter = () =>{
+    return {
+        type: reset
+    }
+}
+
 // Create Reducer for Counter
 const CounterReducer = (state = InitialCounterState, action) => {
     switch (action.type) {
@@ -29,14 +36,18 @@ const CounterReducer = (state = InitialCounterState, action) => {
                 ...state,
                 count: state.count + 1
             }
-        // 
+
         case decrement:
             return {
                 ...state,
                 count: state.count - 1
             }
-        // 
 
+        case reset:
+            return {
+                ... state,
+                count: 0
+            }
 
         default:
             state;
@@ -50,10 +61,13 @@ store.subscribe(() => {
     console.log(store.getState());
 })
 
+// dispatch for action
+
 store.dispatch(incrementCounter())
 store.dispatch(incrementCounter())
 store.dispatch(incrementCounter())
 store.dispatch(decrementCounter())
+store.dispatch(resetCounter())
 
 
 // In this Tutorial we learn:
@@ -75,4 +89,20 @@ store.dispatch(decrementCounter())
 2. create a store named store variable
 3. then subscribe the store to the view using store.subscribe()
 4. dispatch store for action using store.dispatch(incrementCounter())
+*/
+
+// After the Fourth class we learn: 
+
+/*
+1. We Revice the whole fundamental redux
+2. Let's Write again what we have to do for redux
+ # state - count : 0
+ # action - increment, decrement, reset
+ # reducer - const counterReducer = (state, action) =>{switch() case increment: default}
+ # store - getState(), subscribe(), dispatch()
+    * For Store we have several steps-
+    i) require createStore()
+    ii) In a store variable = createStore(counterReducer)
+    iii) store.subscribe(()=>{console.log(store.getState())})
+    iv) store.dispatch(incrementCounter()) / store.dispatch(decrementCounter()) / store.dispatch(resetCounter())
 */
