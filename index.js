@@ -3,6 +3,7 @@ const { createStore } = require('redux')
 const increment = 'INCREMENT'
 const decrement = 'DECREMENT'
 const reset = 'RESET'
+const INCREMENT_COUNTER_BY_VALUE = 'INCREMENT_COUNTER_BY_VALUE'
 
 // State
 
@@ -28,6 +29,13 @@ const resetCounter = () =>{
     }
 }
 
+const incrementCounterByValue = (value) =>{
+    return {
+        type: INCREMENT_COUNTER_BY_VALUE,
+        payload: value
+    }
+}
+
 // Create Reducer for Counter
 const CounterReducer = (state = InitialCounterState, action) => {
     switch (action.type) {
@@ -48,6 +56,11 @@ const CounterReducer = (state = InitialCounterState, action) => {
                 ... state,
                 count: 0
             }
+        case INCREMENT_COUNTER_BY_VALUE:
+            return {
+                ... state,
+                count: state.count + action.payload
+            }
 
         default:
             state;
@@ -63,11 +76,13 @@ store.subscribe(() => {
 
 // dispatch for action
 
-store.dispatch(incrementCounter())
-store.dispatch(incrementCounter())
-store.dispatch(incrementCounter())
-store.dispatch(decrementCounter())
-store.dispatch(resetCounter())
+// store.dispatch(incrementCounter())
+// store.dispatch(incrementCounter())
+// store.dispatch(incrementCounter())
+// store.dispatch(decrementCounter())
+store.dispatch(incrementCounterByValue(5))
+store.dispatch(incrementCounterByValue(5))
+store.dispatch(incrementCounterByValue(6))
 
 
 // In this Tutorial we learn:
@@ -105,4 +120,12 @@ store.dispatch(resetCounter())
     ii) In a store variable = createStore(counterReducer)
     iii) store.subscribe(()=>{console.log(store.getState())})
     iv) store.dispatch(incrementCounter()) / store.dispatch(decrementCounter()) / store.dispatch(resetCounter())
+*/
+
+// After the Fifth Class we learn:
+
+/*
+1. how to use payload in the action
+2. how to show payload data in the view
+3. More example is done by adding a user with payload
 */
