@@ -1,4 +1,5 @@
-const { createStore, combineReducers } = require('redux')
+const { createStore, combineReducers, applyMiddleware } = require('redux')
+const { default: logger } = require('redux-logger')
 
 // Product Reducer
 
