@@ -81,10 +81,14 @@ const fetchData = () => {
                 headers: { "Accept-Encoding": "gzip,deflate,compress" }
             })
             .then((res) => {
-                console.log(res.data);
+                const todos = res.data
+                const titles = todos.map(todo => todo.title)
+                // console.log(titles.slice(0, 10));
+                dispatch(getTodosSuccess(titles))
             })
             .catch((error) => {
-                console.log("Error:", error);
+               const errorMessage = error.message;
+               dispatch(getTodosFailed(errorMessage))
             })
     }
 }
