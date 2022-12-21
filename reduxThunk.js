@@ -87,8 +87,8 @@ const fetchData = () => {
                 dispatch(getTodosSuccess(titles))
             })
             .catch((error) => {
-               const errorMessage = error.message;
-               dispatch(getTodosFailed(errorMessage))
+                const errorMessage = error.message;
+                dispatch(getTodosFailed(errorMessage))
             })
     }
 }
@@ -101,3 +101,56 @@ store.subscribe(() => {
 })
 
 store.dispatch(fetchData())
+
+// In the Ninth class we learn:
+
+// Fetch data using redux-thunk  
+
+/**
+  1. Declare a todos initial state with empty array, isLoading, error. and this look like:
+
+        const todosInitialState = {
+            todos: [],
+            isLoading: false,
+            error: null
+        }
+
+2. then, created three action to request , success, failed of todos. And It looks:
+
+        const getTodosRequest = () =>{
+            return {
+                type: 'GET_TODOS_REQUEST'
+            }
+        }
+
+        // success and failed are same but they have payload with parameter in the function
+
+3. Created a reducer of todos. this also looks like:
+
+        case REQUEST: 
+            return {
+                ...State,
+                isLoading: true
+            }
+        case SUCCESS / FAILED: 
+            same as REQUEST but they have todo and error from the action.payload
+
+4. Crated a store and install axios and redux-thunk
+5. set thunk middleware in the store with reducer
+6. then We dispatch a function: In the Function ---
+7. We Return Another function which carry dispatch parameter and then call the getTodoRequest in the dispatch like: 
+
+        dispatch(getTodosRequest())
+
+8. fetch data using axios. axios give a res. and in the res.data we get the todos. we map the todos to find title. Here an error occured for headers. and the solve is:
+
+         headers: { "Accept-Encoding": "gzip,deflate,compress" }
+
+9. After getting the title, we call the getTodosSuccess. like :
+
+            dispatch(getTodosSuccess(title))
+
+10. axios also show error if Error Occured. and Looks Like:
+
+            dispatch(getTodosFailed(error.message))
+ */
